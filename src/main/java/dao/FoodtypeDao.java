@@ -12,7 +12,7 @@ public interface FoodtypeDao {
     void add(Foodtype foodtype);
 
     // READ
-    Review findById(int id);
+    Foodtype findById(int id);
 
     // UPDATE
     void update(int id,String name);
