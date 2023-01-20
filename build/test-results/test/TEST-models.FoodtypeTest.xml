@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="models.FoodtypeTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-01-19T20:17:10" hostname="kajela-HP-EliteBook-840-G3" time="0.002">
+<testsuite name="models.FoodtypeTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-01-20T08:28:39" hostname="kajela-HP-EliteBook-840-G3" time="0.001">
   <properties/>
-  <testcase name="getNameCorrectlyGetName" classname="models.FoodtypeTest" time="0.002"/>
+  <testcase name="setIdSetsIdCorrectly" classname="models.FoodtypeTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
