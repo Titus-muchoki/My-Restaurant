@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="models.RestaurantTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2023-01-21T11:50:14" hostname="kajela-HP-EliteBook-840-G3" time="0.007">
+  <properties/>
+  <testcase name="getAddressReturnsCorrectAddress" classname="models.RestaurantTest" time="0.002"/>
+  <testcase name="getPhoneReturnsCorrectPhone" classname="models.RestaurantTest" time="0.0"/>
+  <testcase name="setEmailCorrectlySetsEmail" classname="models.RestaurantTest" time="0.002"/>
+  <testcase name="getZipcodeReturnsCorrectZipcode" classname="models.RestaurantTest" time="0.0"/>
+  <testcase name="setWebsiteCorrectlySetsWebsite" classname="models.RestaurantTest" time="0.0"/>
+  <testcase name="setPhoneCorrectlySetsPhone" classname="models.RestaurantTest" time="0.0"/>
+  <testcase name="getEmailReturnsCorrectEmail" classname="models.RestaurantTest" time="0.0"/>
+  <testcase name="setZipcodeCorrectlySetsZipcode" classname="models.RestaurantTest" time="0.0"/>
+  <testcase name="setNameSetsNameCorrectly" classname="models.RestaurantTest" time="0.001"/>
+  <testcase name="getNameReturnsCorrectName" classname="models.RestaurantTest" time="0.0"/>
+  <testcase name="getWebsiteReturnsCorrectWebsite" classname="models.RestaurantTest" time="0.0"/>
+  <testcase name="setAddressSetsAddressCorrectly" classname="models.RestaurantTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

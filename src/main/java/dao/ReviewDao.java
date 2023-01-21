@@ -10,6 +10,8 @@ public interface ReviewDao {
     // CREATE
     void add(Review review);
 
+    List<Review> getAllReviewsByRestaurant(int restaurantId);
+
     // READ
     Review findById(int id);
 
