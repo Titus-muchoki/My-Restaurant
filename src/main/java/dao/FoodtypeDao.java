@@ -1,8 +1,6 @@
 package dao;
 
 import models.Foodtype;
-import models.Review;
-
 import java.util.List;
 
 public interface FoodtypeDao {
