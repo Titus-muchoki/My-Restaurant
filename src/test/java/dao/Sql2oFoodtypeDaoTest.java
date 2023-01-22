@@ -17,7 +17,7 @@ public class Sql2oFoodtypeDaoTest {
     @Before
     public void setUp() throws Exception {
         String connectionString = "jdbc:h2:mem:testing;INIT=RUNSCRIPT from 'classpath:db/create.sql'";
-        Sql2o sql2o = new Sql2o(connectionString, "", "");
+        Sql2o sql2o = new Sql2o(connectionString, "kajela", "8444");
         restaurantDao = new Sql2oRestaurantDao(sql2o);
         foodtypeDao = new Sql2oFoodtypeDao(sql2o);
         conn = sql2o.open();
@@ -60,7 +60,7 @@ public class Sql2oFoodtypeDaoTest {
     public void clearAll() throws Exception {
         Foodtype testFoodtype = setupNewFoodtype();
         Foodtype otherFoodtype = setupNewFoodtype();
-        foodtypeDao.clearAllFoodtype();
+        foodtypeDao.clearAll();
         assertEquals(0, foodtypeDao.getAll().size());
     }
 

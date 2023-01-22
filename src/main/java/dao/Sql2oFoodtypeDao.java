@@ -35,27 +35,27 @@ public class Sql2oFoodtypeDao implements FoodtypeDao {
         }
     }
 
-    @Override
-    public Foodtype findById(int id) {
-        try(Connection con = sql2o.open()) {
-            return con.createQuery("SELECT * FROM foodtypes WHERE id = :id")
-                    .addParameter("id", id)
-                    .executeAndFetchFirst(Foodtype.class);
-        }
-    }
-
-    @Override
-    public void update(int id, String name) {
-        String sql = "UPDATE foodtypes SET (name) = (:name) WHERE id = :id";
-        try(Connection con = sql2o.open()) {
-            con.createQuery(sql)
-                    .addParameter("name", name)
-                    .addParameter("id", id)
-                    .executeUpdate();
-        } catch (Sql2oException EX) {
-            System.out.println(EX);
-        }
-    }
+//    @Override
+//    public Foodtype findById(int id) {
+//        try(Connection con = sql2o.open()) {
+//            return con.createQuery("SELECT * FROM foodtypes WHERE id = :id")
+//                    .addParameter("id", id)
+//                    .executeAndFetchFirst(Foodtype.class);
+//        }
+//    }
+//
+//    @Override
+//    public void update(int id, String name) {
+//        String sql = "UPDATE foodtypes SET (name) = (:name) WHERE id = :id";
+//        try(Connection con = sql2o.open()) {
+//            con.createQuery(sql)
+//                    .addParameter("name", name)
+//                    .addParameter("id", id)
+//                    .executeUpdate();
+//        } catch (Sql2oException EX) {
+//            System.out.println(EX);
+//        }
+//    }
 
     @Override
     public void deleteById(int id) {
@@ -69,7 +69,7 @@ public class Sql2oFoodtypeDao implements FoodtypeDao {
         }
     }
     @Override
-    public void clearAllFoodtype() {
+    public void clearAll() {
     String sql = "DELETE from foodtypes";
     try(Connection con = sql2o.open()) {
     con.createQuery(sql)
