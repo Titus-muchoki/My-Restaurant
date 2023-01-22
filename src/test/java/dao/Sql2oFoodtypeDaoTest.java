@@ -2,6 +2,7 @@ package dao;
 
 import models.Foodtype;
 
+import models.Restaurant;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -63,10 +64,39 @@ public class Sql2oFoodtypeDaoTest {
         foodtypeDao.clearAll();
         assertEquals(0, foodtypeDao.getAll().size());
     }
+    @Test
+    public void addFoodTypeToRestaurantAddsTypeCorrectly() throws Exception {
+
+        Restaurant testRestaurant = setupRestaurant();
+        Restaurant altRestaurant = setupAltRestaurant();
+
+        restaurantDao.add(testRestaurant);
+        restaurantDao.add(altRestaurant);
+
+        Foodtype testFoodtype = setupNewFoodtype();
+
+        foodtypeDao.add(testFoodtype);
+
+        foodtypeDao.addFoodtypeToRestaurant(testFoodtype, testRestaurant);
+        foodtypeDao.addFoodtypeToRestaurant(testFoodtype, altRestaurant);
+
+        assertEquals(2, foodtypeDao.getAllRestaurantsForAFoodtype(testFoodtype.getId()).size());
+    }
 
     // helpers
 
     public Foodtype setupNewFoodtype(){
         return new Foodtype("Sushi");
+    }
+    public Restaurant setupRestaurant (){
+        Restaurant restaurant = new Restaurant("Fish Omena", "214 NE Ngara", "97232", "254-402-9874", "http://fishwitch.com", "hellofishy@fishwitch.com");
+        restaurantDao.add(restaurant);
+        return restaurant;
+    }
+
+    public Restaurant setupAltRestaurant (){
+        Restaurant restaurant = new Restaurant("Fish Omena", "214 NE Ngara", "97232", "254-402-9874");
+        restaurantDao.add(restaurant);
+        return restaurant;
     }
 }
