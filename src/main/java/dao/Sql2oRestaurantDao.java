@@ -1,6 +1,4 @@
 package dao;
-
-import models.Foodtype;
 import models.Restaurant;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
@@ -23,7 +21,7 @@ public class Sql2oRestaurantDao implements RestaurantDao {
     }
     @Override
     public void add(Restaurant restaurant) {
-        String sql = "INSERT INTO restaurants (name,address,zipcode,phone,website,email) VALUES (:name, :address, :zipcode, :phone, :website, :email)"; //raw sql
+        String sql = "INSERT INTO restaurants (name, address, zipcode, phone, website, email) VALUES (:name, :address, :zipcode, :phone, :website, :email)"; //raw sql
         try(Connection con = sql2o.open()) {
             int id = (int) con.createQuery(sql, true) //make a new variable
                     .bind(restaurant)
@@ -45,8 +43,21 @@ public class Sql2oRestaurantDao implements RestaurantDao {
     }
 
     @Override
-    public void update(int id, String name, String address, String zipcode, String phone, String website, String email) {
-
+    public void update(int id, String newName, String newAddress, String newZipcode, String newPhone, String newWebsite, String newEmail) {
+        String sql = "UPDATE restaurants SET (name, address, zipcode, phone, website, email) = (:name, :address, :zipcode, :phone, :website, :email) WHERE id=:id"; //CHECK!!!
+        try (Connection con = sql2o.open()) {
+            con.createQuery(sql)
+                    .addParameter("name", newName)
+                    .addParameter("address", newAddress)
+                    .addParameter("zipcode", newZipcode)
+                    .addParameter("phone", newPhone)
+                    .addParameter("website", newWebsite)
+                    .addParameter("email", newEmail)
+                    .addParameter("id", id)
+                    .executeUpdate();
+        } catch (Sql2oException ex) {
+            System.out.println(ex);
+        }
     }
 
     @Override
@@ -62,7 +73,7 @@ public class Sql2oRestaurantDao implements RestaurantDao {
     }
 
     @Override
-    public void clearAllRestaurant() {
+    public void clearAll() {
         String sql = "DELETE from restaurants";
         try(Connection con = sql2o.open()) {
             con.createQuery(sql)
@@ -72,5 +83,5 @@ public class Sql2oRestaurantDao implements RestaurantDao {
         }
     }
 
-    }
+}
 

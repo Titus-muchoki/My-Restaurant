@@ -1,49 +1,72 @@
 package dao;
 
 import models.Foodtype;
+
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-
+import static org.junit.Assert.*;
 
 public class Sql2oFoodtypeDaoTest {
-private Sql2oFoodtypeDao foodtypeDao;
-private static Connection con;
-@Before
-    public void setup(){
-    String connectionString = "jdbc:h2:mem:testing;INIT=RUNSCRIPT from 'classpath:db/create.sql'";
-    Sql2o sql2o = new Sql2o(connectionString, "kajela", "8444");
-    foodtypeDao = new Sql2oFoodtypeDao(sql2o); //ignore me for now
-    con = sql2o.open(); //keep connection open through entire test so, it does not get erased
-}
-@After
-    public void tearDown(){
-    System.out.println("clearing database");
-    foodtypeDao.clearAllFoodtype();
-    con.close();
-}
+    private Sql2oFoodtypeDao foodtypeDao;
+    private Sql2oRestaurantDao restaurantDao;
+    private Connection conn;
 
-    @AfterClass                                     //run once after all tests in this file completed
-    public static void shutDown() {
-        con.close();                               // close connection once after this entire test file is finished
-        System.out.println("connection closed");
+    @Before
+    public void setUp() throws Exception {
+        String connectionString = "jdbc:h2:mem:testing;INIT=RUNSCRIPT from 'classpath:db/create.sql'";
+        Sql2o sql2o = new Sql2o(connectionString, "", "");
+        restaurantDao = new Sql2oRestaurantDao(sql2o);
+        foodtypeDao = new Sql2oFoodtypeDao(sql2o);
+        conn = sql2o.open();
     }
+
+    @After
+    public void tearDown() throws Exception {
+        conn.close();
+    }
+
     @Test
-    public void addingFoodtypeSetsId() {
-        Foodtype foodtype = new Foodtype("tito");
-        int originalFoodtypeId = foodtype.getId();
+    public void addingFoodSetsId() throws Exception {
+        Foodtype testFoodtype = setupNewFoodtype();
+        int originalFoodtypeId = testFoodtype.getId();
+        foodtypeDao.add(testFoodtype);
+        assertNotEquals(originalFoodtypeId,testFoodtype.getId());
+    }
+
+    @Test
+    public void addedFoodtypesAreReturnedFromGetAll() throws Exception {
+        Foodtype testfoodtype = setupNewFoodtype();
+        foodtypeDao.add(testfoodtype);
+        assertEquals(1, foodtypeDao.getAll().size());
+    }
+
+    @Test
+    public void noFoodtypesReturnsEmptyList() throws Exception {
+        assertEquals(0, foodtypeDao.getAll().size());
+    }
+
+    @Test
+    public void deleteByIdDeletesCorrectFoodtype() throws Exception {
+        Foodtype foodtype = setupNewFoodtype();
         foodtypeDao.add(foodtype);
-        assertNotEquals(originalFoodtypeId, foodtype.getId()); //how does this work?
-
+        foodtypeDao.deleteById(foodtype.getId());
+        assertEquals(0, foodtypeDao.getAll().size());
     }
+
+    @Test
+    public void clearAll() throws Exception {
+        Foodtype testFoodtype = setupNewFoodtype();
+        Foodtype otherFoodtype = setupNewFoodtype();
+        foodtypeDao.clearAllFoodtype();
+        assertEquals(0, foodtypeDao.getAll().size());
+    }
+
+    // helpers
+
     public Foodtype setupNewFoodtype(){
-        return new Foodtype("rice");
+        return new Foodtype("Sushi");
     }
-
 }

@@ -1,7 +1,6 @@
 package dao;
 
 import models.Restaurant;
-import models.Review;
 
 import java.util.List;
 
@@ -20,6 +19,6 @@ public interface RestaurantDao {
         // DELETE
         void deleteById(int id);
 
-        void clearAllRestaurant();
+        void clearAll();
     }
 
