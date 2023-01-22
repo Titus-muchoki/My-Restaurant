@@ -5,21 +5,17 @@ import models.Review;
 import java.util.List;
 
 public interface ReviewDao {
-    List<Review> getAll();
-
-    // CREATE
+    //create
     void add(Review review);
 
+    //read
+    List<Review> getAll();
     List<Review> getAllReviewsByRestaurant(int restaurantId);
 
-    // READ
-    Review findById(int id);
+    //update
+    //omit for now
 
-    // UPDATE
-    void update(int id,   String content,String writtenBy, int rating, int restaurantId);
-
-    // DELETE
+    //delete
     void deleteById(int id);
-    void clearAllReview();
-
+    void clearAll();
 }
