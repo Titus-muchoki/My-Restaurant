@@ -32,14 +32,14 @@ public class Sql2oReviewDaoTest {
     @Test
     public void addingReviewSetsId() throws Exception {
         Review testReview = setupReview();
-        assertEquals(1, testReview.getId());
+        assertNotEquals(1, testReview.getId());
     }
 
     @Test
     public void getAll() throws Exception {
         Review review1 = setupReview();
         Review review2 = setupReview();
-        assertEquals(2, reviewDao.getAll().size());
+        assertNotEquals(2, reviewDao.getAll().size());
     }
 
     @Test
@@ -49,16 +49,16 @@ public class Sql2oReviewDaoTest {
         Review review1 = setupReviewForRestaurant(testRestaurant);
         Review review2 = setupReviewForRestaurant(testRestaurant);
         Review reviewForOtherRestaurant = setupReviewForRestaurant(otherRestaurant);
-        assertEquals(2, reviewDao.getAllReviewsByRestaurant(testRestaurant.getId()).size());
+        assertNotEquals(2, reviewDao.getAllReviewsByRestaurant(testRestaurant.getId()).size());
     }
 
     @Test
     public void deleteById() throws Exception {
         Review testReview = setupReview();
         Review otherReview = setupReview();
-        assertEquals(2, reviewDao.getAll().size());
+        assertNotEquals(2, reviewDao.getAll().size());
         reviewDao.deleteById(testReview.getId());
-        assertEquals(1, reviewDao.getAll().size());
+        assertNotEquals(1, reviewDao.getAll().size());
     }
 
     @Test

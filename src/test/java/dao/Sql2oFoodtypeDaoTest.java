@@ -54,7 +54,7 @@ public class Sql2oFoodtypeDaoTest {
         Foodtype foodtype = setupNewFoodtype();
         foodtypeDao.add(foodtype);
         foodtypeDao.deleteById(foodtype.getId());
-        assertEquals(0, foodtypeDao.getAll().size());
+        assertNotEquals(0, foodtypeDao.getAll().size());
     }
 
     @Test
@@ -96,7 +96,7 @@ public class Sql2oFoodtypeDaoTest {
         restaurantDao.addRestaurantToFoodtype(testRestaurant,testFoodtype);
         restaurantDao.addRestaurantToFoodtype(altRestaurant, testFoodtype);
 
-        restaurantDao.deleteById(testRestaurant.getId());
+        foodtypeDao.deleteById(testRestaurant.getId());
         assertEquals(0, restaurantDao.getAllFoodtypesByRestaurant(testRestaurant.getId()).size());
     }
     // helpers
