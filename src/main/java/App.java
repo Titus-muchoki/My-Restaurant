@@ -3,6 +3,7 @@ import dao.ReviewDao;
 import dao.Sql2oFoodtypeDao;
 import dao.Sql2oRestaurantDao;
 import dao.Sql2oReviewDao;
+import models.Restaurant;
 import models.Review;
 
 import static spark.Spark.*;
@@ -27,5 +28,23 @@ public class App {
         reviewDao = new Sql2oReviewDao(sql2o);
         conn = sql2o.open();
 
+        post("/restaurants/new", "application/json", (req, res) -> {
+            Restaurant restaurant = gson.fromJson(req.body(), Restaurant.class);
+            restaurantDao.add(restaurant);
+            res.status(201);
+            res.type("application/json");
+            return gson.toJson(restaurant);
+        });
+        get("/restaurants", "application/json", (req, res) -> { //accept a request in format JSON from an app
+            res.type("application/json");
+            return gson.toJson(restaurantDao.getAll());//send it back to be displayed
+        });
+
+        get("/restaurants/:id", "application/json", (req, res) -> { //accept a request in format JSON from an app
+            res.type("application/json");
+            int restaurantId = Integer.parseInt(req.params("id"));
+            res.type("application/json");
+            return gson.toJson(restaurantDao.findById(restaurantId));
+        });
     }
-}
+    }
