@@ -71,23 +71,23 @@ public class Sql2oFoodtypeDao implements FoodtypeDao {
         }
         return restaurants;
     }
-
     @Override
     public void deleteById(int id) {
-        String sql = "DELETE from restaurants WHERE id = :id";
-        String deleteJoin = "DELETE from restaurants_foodtypes WHERE restaurantid = :restaurantId";
+        String sql = "DELETE from foodtypes WHERE id=:id";
+        String deleteJoin = "DELETE from restaurants_foodtypes WHERE foodtypeid = :foodtypeId";
         try (Connection con = sql2o.open()) {
             con.createQuery(sql)
                     .addParameter("id", id)
                     .executeUpdate();
-            con.createQuery(deleteJoin)
-                    .addParameter("restaurantId", id)
-                    .executeUpdate();
 
+            con.createQuery(deleteJoin)
+                    .addParameter("foodtypeId", id)
+                    .executeUpdate();
         } catch (Sql2oException ex){
             System.out.println(ex);
         }
     }
+
     @Override
     public void clearAll() {
     String sql = "DELETE from foodtypes";

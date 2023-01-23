@@ -75,7 +75,7 @@ public class Sql2oRestaurantDaoTest {
     public void deleteByIdDeletesCorrectRestaurant() throws Exception {
         Restaurant testRestaurant = setupRestaurant();
         Restaurant otherRestaurant = setupRestaurant();
-        foodtypeDao.deleteById(testRestaurant.getId());
+        restaurantDao.deleteById(testRestaurant.getId());
         assertEquals(1, restaurantDao.getAll().size());
     }
 
@@ -104,8 +104,8 @@ public class Sql2oRestaurantDaoTest {
         assertEquals(Arrays.asList(foodtypes), restaurantDao.getAllFoodtypesByRestaurant(testRestaurant.getId()));
     }
     @Test
-    public void deleteingFoodtypeAlsoUpdatesJoinTable() throws Exception {
-        Restaurant restaurant  = new Restaurant("JOYCAFE","020","123","0717553340","http//kajela.com","titoyut56@gmail.com");
+    public void deletingFoodtypeAlsoUpdatesJoinTable() throws Exception {
+        Restaurant restaurant  = new Restaurant("joy cafe","020","123","0717553340","http//kajela.com","titoyut56@gmail.com");
         restaurantDao.add(restaurant);
 
         Foodtype foodtype = setupNewFoodtype();
