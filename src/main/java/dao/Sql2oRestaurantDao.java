@@ -23,14 +23,14 @@ public class Sql2oRestaurantDao implements RestaurantDao {
     }
     @Override
     public void add(Restaurant restaurant) {
-        String sql = "INSERT INTO restaurants (name, address, zipcode, phone, website, email) VALUES (:name, :address, :zipcode, :phone, :website, :email)"; //raw sql
-        try(Connection con = sql2o.open()) {
-            int id = (int) con.createQuery(sql, true) //make a new variable
+        String sql = "INSERT INTO restaurants (name, address, zipcode, phone, website, email) VALUES (:name, :address, :zipcode, :phone, :website, :email)";
+        try (Connection con = sql2o.open()) {
+            int id = (int) con.createQuery(sql, true)
                     .bind(restaurant)
                     .executeUpdate()
                     .getKey();
             restaurant.setId(id);
-        } catch ( Sql2oException ex){
+        } catch (Sql2oException ex) {
             System.out.println(ex);
         }
     }

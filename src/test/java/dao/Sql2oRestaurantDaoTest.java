@@ -121,9 +121,9 @@ public class Sql2oRestaurantDaoTest {
 //    }
 
     //helpers
-    public Foodtype setupNewFoodtype(){
-        return new Foodtype("Sushi");
-    }
+//    public Foodtype setupNewFoodtype(){
+//        return new Foodtype("Sushi");
+//    }
 
     public Restaurant setupRestaurant (){
         Restaurant restaurant = new Restaurant("Fish Omena", "214 NE Ngara", "97232", "254-402-9874", "http://fishwitch.com", "hellofishy@fishwitch.com");

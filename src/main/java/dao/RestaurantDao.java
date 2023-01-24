@@ -6,14 +6,15 @@ import models.Restaurant;
 import java.util.List;
 
 public interface RestaurantDao {
-        List<Restaurant> getAll();
-        List<Foodtype> getAllFoodtypesByRestaurant(int restaurantId);
 
         // CREATE
         void add(Restaurant restaurant);
         void addRestaurantToFoodtype(Restaurant restaurant, Foodtype foodtype);
 
         // READ
+        List<Restaurant> getAll();
+        List<Foodtype> getAllFoodtypesByRestaurant(int restaurantId);
+
         Restaurant findById(int id);
 
         // UPDATE
