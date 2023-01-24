@@ -1,4 +1,5 @@
 import com.google.gson.Gson;
+import com.networknt.exception.ApiException;
 import dao.Sql2oFoodtypeDao;
 import dao.Sql2oRestaurantDao;
 import dao.Sql2oReviewDao;
@@ -7,6 +8,8 @@ import models.Restaurant;
 import models.Review;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
+
+import java.util.List;
 
 import static spark.Spark.*;
 
@@ -50,7 +53,20 @@ public class App {
             int restaurantId = Integer.parseInt(req.params("id"));
             return gson.toJson(restaurantDao.findById(restaurantId));
         });
+        get("/restaurants/:id/reviews", "application/json", (req, res) ->{
+            int restaurantId = Integer.parseInt(req.params("id"));
 
+            Restaurant restaurantToFind = restaurantDao.findById(restaurantId);
+            List<Review> allReviews;
+
+            if (restaurantToFind == null){
+                throw new ApiException(404, String.format("No restaurant with the id: \"%s\" exists", req.params("id")));
+            }
+            allReviews = reviewDao.getAllReviewsByRestaurant(restaurantId);
+            return gson.toJson(allReviews);
+
+        }
+    );
         //CREATE
         get("/foodtypes", "application/json", (req, res) ->{
             return gson.toJson(foodtypeDao.getAll());
