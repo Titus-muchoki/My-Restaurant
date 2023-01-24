@@ -9,7 +9,9 @@ import models.Review;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static spark.Spark.*;
 
@@ -101,6 +103,18 @@ public class App {
         }
     );
         //FILTERS
+
+        exception(ApiException.class, (exception, req, res) -> {
+            ApiException err = (ApiException) exception;
+            Map<String, Object> jsonMap = new HashMap<>();
+            jsonMap.put("status", err.getStatus());
+            jsonMap.put("errorMessage", err.getMessage());
+            res.type("application/json");
+            res.status(err.hashCode());
+            res.body(gson.toJson(jsonMap));
+        });
+
+
         after((req, res) ->{
             res.type("application/json");
         });
