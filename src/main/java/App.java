@@ -1,13 +1,12 @@
-import static spark.Spark.*;
-
 import com.google.gson.Gson;
 import dao.Sql2oFoodtypeDao;
 import dao.Sql2oRestaurantDao;
 import dao.Sql2oReviewDao;
 import models.Restaurant;
-
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
+
+import static spark.Spark.*;
 
 public class App {
     public static void main(String[] args) {
@@ -18,7 +17,7 @@ public class App {
         Gson gson = new Gson();
 
         staticFileLocation("/public");
-        String connectionString = "jdbc:h2:~/jadle.db;INIT=RUNSCRIPT from 'classpath:db/create.sql'";
+        String connectionString = "jdbc:h2:~/Jadle.db;INIT=RUNSCRIPT from 'classpath:db/create.sql'";
         Sql2o sql2o = new Sql2o(connectionString, "kajela", "8444");
 
         restaurantDao = new Sql2oRestaurantDao(sql2o);
