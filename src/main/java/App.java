@@ -36,7 +36,14 @@ public class App {
 
         //READ
         get("/restaurants", "application/json", (req, res) -> {
-            return gson.toJson(restaurantDao.getAll());
+            System.out.println(restaurantDao.getAll());
+
+            if (restaurantDao.getAll().size() > 0){
+                return gson.toJson(restaurantDao.getAll());
+            }
+            else {
+                return "{\"message\":\"I'm sorry, but no restaurants are currently listed in the database.\"}";
+            }
         });
 
         get("/restaurants/:id", "application/json", (req, res) -> {
