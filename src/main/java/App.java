@@ -1,6 +1,6 @@
 import com.google.gson.Gson;
 
-import com.networknt.exception.ApiException;
+import exceptions.ApiException;
 import dao.Sql2oFoodtypeDao;
 import dao.Sql2oRestaurantDao;
 import dao.Sql2oReviewDao;
@@ -152,10 +152,10 @@ public class App {
         exception(ApiException.class, (exception, req, res) -> {
             ApiException err = (ApiException) exception;
             Map<String, Object> jsonMap = new HashMap<>();
-            jsonMap.put("status", err.getStatus());
+            jsonMap.put("status", err.getStatusCode());
             jsonMap.put("errorMessage", err.getMessage());
             res.type("application/json");
-            res.status(err.hashCode());
+            res.status(err.getStatusCode());
             res.body(gson.toJson(jsonMap));
         });
 
