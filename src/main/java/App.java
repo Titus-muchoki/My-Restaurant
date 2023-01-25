@@ -126,7 +126,7 @@ public class App {
             Restaurant restaurantToFind = restaurantDao.findById(restaurantId);
             if (restaurantToFind == null){
                 throw new ApiException(404, String.format("No restaurant with the id: \"%s\" exists", req.params("id")));
-            }else if (restaurantDao.Restaurant(restaurantId).size()==0){
+            }else if (restaurantDao.getAllFoodtypesByRestaurant(restaurantId).size()==0){
                 return "{\"message\":\"I'm sorry, but no foodtypes are listed for this restaurant.\"}";
 
             }else {
