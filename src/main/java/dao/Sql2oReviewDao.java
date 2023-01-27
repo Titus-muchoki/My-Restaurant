@@ -42,6 +42,15 @@ public class Sql2oReviewDao implements ReviewDao {
                     .executeAndFetch(Review.class);
         }
     }
+
+    @Override
+    public List<Review> getAllReviewsByRestaurantSortedNewestToOldest(int restaurantId) {
+        List<Review> unsortedReviews = getAllReviewsByRestaurant(restaurantId); //calling other method!
+        List<Review> sortedReviews = unsortedReviews;
+
+        return sortedReviews;
+    }
+
     @Override
     public void deleteById(int id) {
         String sql = "DELETE from reviews WHERE id=:id";
