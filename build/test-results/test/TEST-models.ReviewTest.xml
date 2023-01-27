@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="models.ReviewTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2023-01-25T19:25:24" hostname="kajela-HP-EliteBook-840-G3" time="0.006">
+  <properties/>
+  <testcase name="setRestaurantIdCorrectlySetsRestaurantsId" classname="models.ReviewTest" time="0.003"/>
+  <testcase name="setWrittenByCorrectlySetsWrittenBy" classname="models.ReviewTest" time="0.001"/>
+  <testcase name="getRatingReturnsCorrectRating" classname="models.ReviewTest" time="0.0"/>
+  <testcase name="setRatingCorrectlySetsRating" classname="models.ReviewTest" time="0.0"/>
+  <testcase name="setContentCorrectlySetsContent" classname="models.ReviewTest" time="0.0"/>
+  <testcase name="getRestaurantIdReturnsCorrectRestaurantId" classname="models.ReviewTest" time="0.0"/>
+  <testcase name="getWrittenByCorrectlyReturnsWrittenBy" classname="models.ReviewTest" time="0.0"/>
+  <testcase name="getContentGetsCorrectContent" classname="models.ReviewTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -8,12 +8,18 @@ public class Review {
     private int rating;
     private int id;
     private int restaurantId; //will be used to connect Restaurant to Review (one-to-many)
+    private long createdat;
+    private String formattedCreatedAt;
+
+
 
     public Review(String content, String writtenBy, int rating, int restaurantId) {
         this.content = content;
         this.writtenBy = writtenBy;
         this.rating = rating;
         this.restaurantId = restaurantId;
+        this.createdat = System.currentTimeMillis();
+        setFormattedCreatedAt(); //we'll make me in a minute
     }
 
     @Override
