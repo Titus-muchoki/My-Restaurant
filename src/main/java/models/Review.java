@@ -11,8 +11,6 @@ public class Review {
     private long createdat;
     private String formattedCreatedAt;
 
-
-
     public Review(String content, String writtenBy, int rating, int restaurantId) {
         this.content = content;
         this.writtenBy = writtenBy;
@@ -72,5 +70,21 @@ public class Review {
 
     public void setId(int id) {
         this.id = id;
+    }
+    public long getCreatedat() {
+        return createdat;
+    }
+
+    public void setCreatedat() {
+        this.createdat = System.currentTimeMillis(); // It'll become clear soon why we need this explicit setter
+    }
+
+    public String getFormattedCreatedAt(){
+        String someString = "";
+        return someString; //more on this in a sec
+    }
+
+    public void setFormattedCreatedAt(){
+        this.formattedCreatedAt = "some time";
     }
 }
