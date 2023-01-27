@@ -77,7 +77,10 @@ public class Sql2oReviewDaoTest {
 
         long creationTime = testReview.getCreatedat();
         long savedTime = reviewDao.getAll().get(0).getCreatedat();
-        assertEquals(creationTime, reviewDao.getAll().get(0).getCreatedat());
+        String formattedCreationTime = testReview.getFormattedCreatedAt();
+        String formattedSavedTime = reviewDao.getAll().get(0).getFormattedCreatedAt();
+        assertEquals(formattedCreationTime,formattedSavedTime);
+        assertEquals(creationTime, savedTime);
     }
 
     //helpers
