@@ -25,12 +25,12 @@ public class Review {
         if (this == o) return true;
         if (!(o instanceof Review)) return false;
         Review review = (Review) o;
-        return rating == review.rating && id == review.id && restaurantId == review.restaurantId && Objects.equals(content, review.content) && Objects.equals(writtenBy, review.writtenBy);
+        return rating == review.rating && id == review.id && restaurantId == review.restaurantId && createdat == review.createdat && Objects.equals(content, review.content) && Objects.equals(writtenBy, review.writtenBy) && Objects.equals(formattedCreatedAt, review.formattedCreatedAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(content, writtenBy, rating, id, restaurantId);
+        return Objects.hash(content, writtenBy, rating, id, restaurantId, createdat, formattedCreatedAt);
     }
 
     public String getContent() {
