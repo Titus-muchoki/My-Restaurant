@@ -85,6 +85,6 @@ public class Review {
     }
 
     public void setFormattedCreatedAt(){
-        this.formattedCreatedAt = "some time";
+        this.formattedCreatedAt = "sometime";
     }
 }
