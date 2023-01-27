@@ -1,5 +1,7 @@
 package models;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Objects;
 
 public class Review {
@@ -80,11 +82,14 @@ public class Review {
     }
 
     public String getFormattedCreatedAt(){
-        String someString = "";
-        return someString; //more on this in a sec
+        Date date = new Date(createdat);
+        String datePatternToUse = "MM/dd/yyyy @ K:mm a"; //see https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html
+        SimpleDateFormat sdf = new SimpleDateFormat(datePatternToUse);
+        return sdf.format(date);
     }
 
     public void setFormattedCreatedAt(){
         this.formattedCreatedAt = "sometime";
     }
+
 }
