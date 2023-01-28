@@ -105,8 +105,17 @@ public class App {
             reviewDao.add(review);
             res.status(201);
             return gson.toJson(review);
-        }
-    );
+        });
+        get("/restaurants/:id/sortedReviews", "application/json", (req, res) ->{
+            int restaurantId = Integer.parseInt(req.params("id"));
+            Restaurant restaurantToFind = restaurantDao.findById(restaurantId);
+            List<Review> allReviews;
+            if (restaurantToFind == null){
+                throw new ApiException(404, String.format("No restaurant with the id: \"%s\" exists", req.params("id")));
+            }
+            allReviews = reviewDao.getAllReviewsByRestaurantSortedNewestToOldest(restaurantId);
+            return gson.toJson(allReviews);
+        });
         post("/restaurants/:restaurantId/foodtype/:foodtypeId", "application/json", (req, res) -> {
             int restaurantId = Integer.parseInt(req.params("restaurantId"));
             int foodtypeId = Integer.parseInt(req.params("foodtypeId"));
