@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dao.Sql2oReviewDaoTest" tests="1" skipped="0" failures="1" errors="0" timestamp="2023-01-27T17:12:26" hostname="kajela-HP-EliteBook-840-G3" time="0.309">
+<testsuite name="dao.Sql2oReviewDaoTest" tests="1" skipped="0" failures="1" errors="0" timestamp="2023-01-27T18:41:18" hostname="kajela-HP-EliteBook-840-G3" time="2.379">
   <properties/>
-  <testcase name="timeStampIsReturnedCorrectly" classname="dao.Sql2oReviewDaoTest" time="0.309">
+  <testcase name="reviewAreReturnedInCorrectOrder" classname="dao.Sql2oReviewDaoTest" time="2.379">
     <failure message="java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0" type="java.lang.IndexOutOfBoundsException">java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
 	at java.base/jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:64)
 	at java.base/jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:70)
 	at java.base/jdk.internal.util.Preconditions.checkIndex(Preconditions.java:248)
 	at java.base/java.util.Objects.checkIndex(Objects.java:372)
 	at java.base/java.util.ArrayList.get(ArrayList.java:459)
-	at dao.Sql2oReviewDaoTest.timeStampIsReturnedCorrectly(Sql2oReviewDaoTest.java:79)
+	at dao.Sql2oReviewDaoTest.reviewAreReturnedInCorrectOrder(Sql2oReviewDaoTest.java:100)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -54,6 +54,8 @@
 </failure>
   </testcase>
   <system-out><![CDATA[org.sql2o.Sql2oException: Error in executeUpdate, Parameter "#1" is not set; SQL statement:
+INSERT INTO reviews (writtenby, content, rating, restaurantid, createdat) VALUES (?, ?, ?, ?, ?) [90012-191]
+org.sql2o.Sql2oException: Error in executeUpdate, Parameter "#1" is not set; SQL statement:
 INSERT INTO reviews (writtenby, content, rating, restaurantid, createdat) VALUES (?, ?, ?, ?, ?) [90012-191]
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>

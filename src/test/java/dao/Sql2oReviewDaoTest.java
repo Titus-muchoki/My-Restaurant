@@ -94,6 +94,31 @@ public class Sql2oReviewDaoTest {
         catch (InterruptedException ex){
             ex.printStackTrace();
         }
+        Review testSecondReview = new Review("red meat","tito",4,testRestaurant.getId());
+        reviewDao.add(testSecondReview);
+        try {
+            Thread.sleep(2000);
+        }catch(InterruptedException ex){
+            ex.printStackTrace();
+        }
+        Review testThirdReview = new Review("white kitchen","mukami",2, testRestaurant.getId());
+        reviewDao.add(testThirdReview);
+        try {
+            Thread.sleep(2000);
+        }catch (InterruptedException ex){
+            ex.printStackTrace();
+        }
+        Review testFourthReview = new Review("kfc","gathoni",3,testRestaurant.getId());
+        reviewDao.add(testFourthReview);
+        try {
+            Thread.sleep(2000);
+        }catch (InterruptedException ex){
+            ex.printStackTrace();
+        }
+        Review testFifthReview = new Review("mama rocco","samuel mburu",4, testRestaurant.getId());
+        reviewDao.add(testFifthReview);
+
+        assertEquals("tito", reviewDao.getAllReviewsByRestaurantSortedNewestToOldest(testRestaurant.getId()).get(0).getContent());
     }
 
     //helpers
