@@ -119,6 +119,7 @@ public class Sql2oReviewDaoTest {
         reviewDao.add(testFifthReview);
 
         assertEquals("tito", reviewDao.getAllReviewsByRestaurantSortedNewestToOldest(testRestaurant.getId()).get(0).getContent());
+        assertEquals(4, reviewDao.getAllReviewsByRestaurantSortedNewestToOldest(testRestaurant.getId()).get(0).getRestaurantId());
     }
 
     //helpers
