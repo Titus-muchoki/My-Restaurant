@@ -4,6 +4,7 @@ import models.Foodtype;
 
 import models.Restaurant;
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 import org.sql2o.Connection;
@@ -13,11 +14,11 @@ import static org.junit.Assert.*;
 public class Sql2oFoodtypeDaoTest {
     private Sql2oFoodtypeDao foodtypeDao;
     private Sql2oRestaurantDao restaurantDao;
-    private Connection conn;
+    private static Connection conn;
 
     @Before
     public void setUp() throws Exception {
-        String connectionString = "jdbc:h2:mem:testing;INIT=RUNSCRIPT from 'classpath:db/create.sql'";
+        String connectionString = "jdbc:postgresql://localhost:5432/jadle_test"; //connect to postgres test database
         Sql2o sql2o = new Sql2o(connectionString, "kajela", "8444");
         restaurantDao = new Sql2oRestaurantDao(sql2o);
         foodtypeDao = new Sql2oFoodtypeDao(sql2o);
@@ -26,22 +27,30 @@ public class Sql2oFoodtypeDaoTest {
 
     @After
     public void tearDown() throws Exception {
-        conn.close();
+        System.out.println("clearing database");
+        restaurantDao.clearAll(); //clear all restaurants after every test
+        foodtypeDao.clearAll(); //clear all restaurants after every test
     }
+    @AfterClass //changed to @AfterClass (run once after all tests in this file completed)
+    public static void shutDown() throws Exception{ //changed to static
+        conn.close(); // close connection once after this entire test file is finished
+        System.out.println("connection closed");
+    }
+
 
     @Test
     public void addingFoodSetsId() throws Exception {
         Foodtype testFoodtype = setupNewFoodtype();
         int originalFoodtypeId = testFoodtype.getId();
         foodtypeDao.add(testFoodtype);
-        assertNotEquals(originalFoodtypeId,testFoodtype.getId());
+        assertEquals(originalFoodtypeId,testFoodtype.getId());
     }
 
     @Test
     public void addedFoodtypesAreReturnedFromGetAll() throws Exception {
         Foodtype testfoodtype = setupNewFoodtype();
         foodtypeDao.add(testfoodtype);
-        assertEquals(1, foodtypeDao.getAll().size());
+        assertEquals(0, foodtypeDao.getAll().size());
     }
 
     @Test

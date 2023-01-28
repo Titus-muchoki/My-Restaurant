@@ -3,6 +3,7 @@ package dao;
 import models.Restaurant;
 import models.Review;
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 import org.sql2o.Connection;
@@ -11,13 +12,13 @@ import org.sql2o.Sql2o;
 import static org.junit.Assert.*;
 
 public class Sql2oReviewDaoTest {
-    private Connection conn;
+    private static Connection conn;
     private Sql2oReviewDao reviewDao;
     private Sql2oRestaurantDao restaurantDao;
 
     @Before
     public void setUp() throws Exception {
-        String connectionString = "jdbc:h2:mem:testing;INIT=RUNSCRIPT from 'classpath:db/create.sql'";
+        String connectionString = "jdbc:postgresql://localhost:5432/jadle_test"; //connect to postgres test database
         Sql2o sql2o = new Sql2o(connectionString, "kajela", "8444");
         reviewDao = new Sql2oReviewDao(sql2o);
         restaurantDao = new Sql2oRestaurantDao(sql2o);
@@ -26,8 +27,16 @@ public class Sql2oReviewDaoTest {
 
     @After
     public void tearDown() throws Exception {
-        conn.close();
+        System.out.println("clearing database");
+        restaurantDao.clearAll(); //clear all restaurants after every test
+        reviewDao.clearAll(); //clear all restaurants after every test
     }
+    @AfterClass //changed to @AfterClass (run once after all tests in this file completed)
+    public static void shutDown() throws Exception{ //changed to static
+        conn.close(); // close connection once after this entire test file is finished
+        System.out.println("connection closed");
+    }
+
 
     @Test
     public void addingReviewSetsId() throws Exception {
