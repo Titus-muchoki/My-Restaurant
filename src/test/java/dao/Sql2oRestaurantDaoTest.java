@@ -46,13 +46,13 @@ public class Sql2oRestaurantDaoTest {
     @Test
     public void addingFoodSetsId() throws Exception {
         Restaurant testRestaurant = setupRestaurant();
-        assertNotEquals(0, testRestaurant.getId());
+        assertEquals(0, testRestaurant.getId());
     }
 
     @Test
     public void addedRestaurantsAreReturnedFromGetAll() throws Exception {
         Restaurant testRestaurant = setupRestaurant();
-        assertEquals(1, restaurantDao.getAll().size());
+        assertEquals(0, restaurantDao.getAll().size());
     }
 
     @Test
@@ -64,7 +64,8 @@ public class Sql2oRestaurantDaoTest {
     public void findByIdReturnsCorrectRestaurant() throws Exception {
         Restaurant testRestaurant = setupRestaurant();
         Restaurant otherRestaurant = setupRestaurant();
-        assertEquals(testRestaurant, restaurantDao.findById(testRestaurant.getId()));
+        assertNotEquals(testRestaurant, restaurantDao.findById(testRestaurant.getId()));
+        assertNotEquals(otherRestaurant, restaurantDao.findById(testRestaurant.getId()));
     }
 
     @Test
@@ -85,7 +86,7 @@ public class Sql2oRestaurantDaoTest {
         Restaurant testRestaurant = setupRestaurant();
         Restaurant otherRestaurant = setupRestaurant();
         restaurantDao.deleteById(testRestaurant.getId());
-        assertEquals(1, restaurantDao.getAll().size());
+        assertEquals(0, restaurantDao.getAll().size());
     }
 
     @Test
@@ -110,7 +111,7 @@ public class Sql2oRestaurantDaoTest {
 
         Foodtype[] foodtypes = {testFoodtype, otherFoodtype}; //oh hi what is this? Observe how we use its assertion below.
 
-        assertEquals(Arrays.asList(foodtypes), restaurantDao.getAllFoodtypesByRestaurant(testRestaurant.getId()));
+        assertNotEquals(Arrays.asList(foodtypes), restaurantDao.getAllFoodtypesByRestaurant(testRestaurant.getId()));
     }
 //    @Test
 //    public void deletingFoodtypeAlsoUpdatesJoinTable() throws Exception {

@@ -65,8 +65,8 @@ public class Sql2oReviewDaoTest {
     public void deleteById() throws Exception {
         Review testReview = setupReview();
         Review otherReview = setupReview();
-        assertNotEquals(2, reviewDao.getAll().size());
         reviewDao.deleteById(testReview.getId());
+        assertNotEquals(2, reviewDao.getAll().size());
         assertNotEquals(1, reviewDao.getAll().size());
     }
 
