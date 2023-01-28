@@ -99,6 +99,8 @@ public class App {
         post("/restaurants/:restaurantId/reviews/new", "application/json", (req, res) ->{
             int restaurantId = Integer.parseInt(req.params("restaurantId"));
             Review review = gson.fromJson(req.body(), Review.class);
+            review.setCreatedat(); //I am new!
+            review.setFormattedCreatedAt();
             review.setRestaurantId(restaurantId);
             reviewDao.add(review);
             res.status(201);
