@@ -70,16 +70,26 @@ public class Sql2oRestaurantDaoTest {
 
     @Test
     public void updateCorrectlyUpdatesAllFields() throws Exception {
-        Restaurant testRestaurant = setupRestaurant();
-        restaurantDao.update(testRestaurant.getId(), "a", "b", "c", "d", "e", "f");
-        Restaurant foundRestaurant = restaurantDao.findById(testRestaurant.getId());
-        assertEquals("a", foundRestaurant.getName());
-        assertEquals("b", foundRestaurant.getAddress());
-        assertEquals("c", foundRestaurant.getZipcode());
-        assertEquals("d", foundRestaurant.getPhone());
-        assertEquals("e", foundRestaurant.getWebsite());
-        assertEquals("f", foundRestaurant.getEmail());
+        Restaurant restaurant = setupRestaurant();
+        restaurantDao.update(restaurant.getId(), "Fish Omena", "214 NE Ngara", "97232", "254-402-9874", "http://fishwitch.com", "hellofishy@fishwitch.com");
+        Restaurant restaurant1 = restaurantDao.findById(restaurant.getId());
+        assertEquals("Fish Omena", restaurant1.getName());
+        assertEquals("214 NE Ngara", restaurant1.getAddress());
+        assertEquals("97232", restaurant1.getZipcode());
+        assertEquals("254-402-9874", restaurant1.getPhone());
+        assertEquals("http://fishwitch.com", restaurant1.getWebsite());
+        assertEquals("hellofishy@fishwitch.com", restaurant1.getEmail());
     }
+
+//    @Test
+//    public void updateCorrectlyUpdatesAllFields() throws Exception {
+//        String initialName = "mow the lawn";
+//        Restaurant restaurant = new Restaurant (initialName, "","","","","");// or use the helper method for easier refactoring
+//        restaurantDao.add(restaurant);
+//        restaurantDao.update(restaurant.getId(),"mow the lawn", "","","","", "");
+//        Restaurant updatedRestaurant =  restaurantDao.findById(restaurant.getId()); //why do I need to refind this?
+//        assertEquals(initialName, updatedRestaurant.getName());
+//    }
 
     @Test
     public void deleteByIdDeletesCorrectRestaurant() throws Exception {
@@ -113,27 +123,26 @@ public class Sql2oRestaurantDaoTest {
 
         assertNotEquals(Arrays.asList(foodtypes), restaurantDao.getAllFoodtypesByRestaurant(testRestaurant.getId()));
     }
-//    @Test
-//    public void deletingFoodtypeAlsoUpdatesJoinTable() throws Exception {
-//        Restaurant restaurant  = new Restaurant("joy cafe","020","123","0717553340","http//kajela.com","titoyut56@gmail.com");
-//        restaurantDao.add(restaurant);
-//        Restaurant testRestaurant = setupRestaurant();
-//        restaurantDao.add(testRestaurant);
-//
-//        Restaurant altRestaurant = setupAltRestaurant();
-//        restaurantDao.add(altRestaurant);
-//
-//        restaurantDao.addRestaurantToFoodtype(testRestaurant,testFoodtype);
-//        restaurantDao.addRestaurantToFoodtype(altRestaurant, testFoodtype);
-//
-//        restaurantDao.deleteById(testRestaurant.getId());
-//        assertEquals(0, restaurantDao.getAllFoodtypesByRestaurant(testRestaurant.getId()).size());
-//    }
+
+    @Test
+    public void deleteingRestaurantAlsoUpdatesJoinTable() throws Exception {
+        Foodtype testFoodtype  = new Foodtype("Seafood");
+        foodtypeDao.add(testFoodtype);
+
+        Restaurant testRestaurant = setupRestaurant();
+        restaurantDao.add(testRestaurant);
+
+        Restaurant altRestaurant = setupAltRestaurant();
+        restaurantDao.add(altRestaurant);
+
+        restaurantDao.addRestaurantToFoodtype(testRestaurant,testFoodtype);
+        restaurantDao.addRestaurantToFoodtype(altRestaurant, testFoodtype);
+
+        restaurantDao.deleteById(testRestaurant.getId());
+        assertEquals(0, restaurantDao.getAllFoodtypesByRestaurant(testRestaurant.getId()).size());
+    }
 
     //helpers
-//    public Foodtype setupNewFoodtype(){
-//        return new Foodtype("Sushi");
-//    }
 
     public Restaurant setupRestaurant (){
         Restaurant restaurant = new Restaurant("Fish Omena", "214 NE Ngara", "97232", "254-402-9874", "http://fishwitch.com", "hellofishy@fishwitch.com");
