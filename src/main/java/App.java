@@ -34,6 +34,9 @@ public class App {
 
         //CREATE
         post("/restaurants/new", "application/json", (req, res) -> {
+            if (req.body().isEmpty()){
+                return gson.toJson("error:payload cannot be null");
+            }
             Restaurant restaurant = gson.fromJson(req.body(), Restaurant.class);
             restaurantDao.add(restaurant);
             res.status(201);;
@@ -52,10 +55,19 @@ public class App {
             }
         });
 
-        get("/restaurants/:id", "application/json", (req, res) -> {
+        get("/restaurants/:id", "application/json", (req, res) -> { //accept a request in format JSON from an app
             int restaurantId = Integer.parseInt(req.params("id"));
-            return gson.toJson(restaurantDao.findById(restaurantId));
+            Restaurant restaurantToFind = restaurantDao.findById(restaurantId);
+            if (restaurantToFind == null){
+                throw new ApiException(404, String.format("No restaurant with the id: \"%s\" exists", req.params("id")));
+            }
+            return gson.toJson(restaurantToFind);
         });
+
+//        get("/restaurants/:id", "application/json", (req, res) -> {
+//            int restaurantId = Integer.parseInt(req.params("id"));
+//            return gson.toJson(restaurantDao.findById(restaurantId));
+//        });
 
         get("/restaurants/:id/reviews", "application/json", (req, res) -> {
             int restaurantId = Integer.parseInt(req.params("id"));
@@ -75,15 +87,14 @@ public class App {
         //CREATE
         get("/foodtypes", "application/json", (req, res) ->{
             return gson.toJson(foodtypeDao.getAll());
-                }
-        );
+                });
+
         post("/foodtypes/new", "application/json", (req, res) ->{
             Foodtype foodtype = gson.fromJson(req.body(), Foodtype.class);
             foodtypeDao.add(foodtype);
             res.status(201);
             return  gson.toJson(foodtype);
-        }
-    );
+        });
         // CREATE
         get("/reviews", "application/json", (req, res) ->{
             return gson.toJson(reviewDao.getAll());
@@ -94,8 +105,7 @@ public class App {
             reviewDao.add(review);
             res.status(201);
             return gson.toJson(review);
-        }
-    );
+        });
         post("/restaurants/:restaurantId/reviews/new", "application/json", (req, res) ->{
             int restaurantId = Integer.parseInt(req.params("restaurantId"));
             Review review = gson.fromJson(req.body(), Review.class);
