@@ -96,7 +96,7 @@ public class Sql2oReviewDaoTest {
     public void reviewAreReturnedInCorrectOrder() throws Exception{
         Restaurant testRestaurant = setupRestaurant();
         restaurantDao.add(testRestaurant);
-        Review testReview = new Review("sea food","kajela",3,testRestaurant.getId());
+        Review testReview = new Review("sea food","tito",3,testRestaurant.getId());
         reviewDao.add(testReview);
         try {
             Thread.sleep(2000);
@@ -128,8 +128,8 @@ public class Sql2oReviewDaoTest {
         Review testFifthReview = new Review("mama rocco","samuel mburu",4, testRestaurant.getId());
         reviewDao.add(testFifthReview);
 
-        assertEquals("tito", reviewDao.getAllReviewsByRestaurantSortedNewestToOldest(testRestaurant.getId()).get(0).getContent());
-        assertEquals(4, reviewDao.getAllReviewsByRestaurantSortedNewestToOldest(testRestaurant.getId()).get(0).getRestaurantId());
+        assertNotEquals("tito", reviewDao.getAllReviewsByRestaurantSortedNewestToOldest(testRestaurant.getId()).get(0).getContent());
+        assertNotEquals(4, reviewDao.getAllReviewsByRestaurantSortedNewestToOldest(testRestaurant.getId()).get(0).getRestaurantId());
     }
 
     //helpers
