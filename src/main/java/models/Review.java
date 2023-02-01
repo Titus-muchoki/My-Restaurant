@@ -87,12 +87,12 @@ public class Review implements Comparable<Review> {
         SimpleDateFormat sdf = new SimpleDateFormat(datePatternToUse);
         return sdf.format(date);
     }
-
     public void setFormattedCreatedAt(){
         Date date = new Date(createdat);
         String datePatternToUse = "MM/dd/yyyy @ K:mm a";
         SimpleDateFormat sdf = new SimpleDateFormat(datePatternToUse);
         this.formattedCreatedAt = sdf.format(date);
+        System.out.println(this.formattedCreatedAt);
     }
     @Override
     public int compareTo(Review reviewObject) {

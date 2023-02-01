@@ -23,14 +23,14 @@ public class Sql2oReviewDao implements ReviewDao {
 
     @Override
     public void add(Review review) {
-        String sql = "INSERT INTO reviews (writtenby, content, rating, restaurantid, createdat) VALUES (:writtenby, :content, :rating, :restaurantid, :createdat)"; //raw sql
-        try(Connection con = sql2o.open()) {
-            int id = (int) con.createQuery(sql, true) //make a new variable
+        String sql = "INSERT INTO reviews (writtenby, rating, content, restaurantid, createdat) VALUES (:writtenBy, :rating, :content, :restaurantId, :createdat)"; //if you change your model, be sure to update here as well!
+        try (Connection con = sql2o.open()) {
+            int id = (int) con.createQuery(sql, true)
                     .bind(review)
                     .executeUpdate()
                     .getKey();
             review.setId(id);
-        } catch ( Sql2oException ex){
+        } catch (Sql2oException ex) {
             System.out.println(ex);
         }
     }
