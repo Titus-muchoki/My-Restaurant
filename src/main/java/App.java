@@ -64,10 +64,6 @@ public class App {
             return gson.toJson(restaurantToFind);
         });
 
-//        get("/restaurants/:id", "application/json", (req, res) -> {
-//            int restaurantId = Integer.parseInt(req.params("id"));
-//            return gson.toJson(restaurantDao.findById(restaurantId));
-//        });
 
         get("/restaurants/:id/reviews", "application/json", (req, res) -> {
             int restaurantId = Integer.parseInt(req.params("id"));

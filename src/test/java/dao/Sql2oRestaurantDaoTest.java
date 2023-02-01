@@ -81,15 +81,6 @@ public class Sql2oRestaurantDaoTest {
         assertEquals("hellofishy@fishwitch.com", restaurant1.getEmail());
     }
 
-//    @Test
-//    public void updateCorrectlyUpdatesAllFields() throws Exception {
-//        String initialName = "mow the lawn";
-//        Restaurant restaurant = new Restaurant (initialName, "","","","","");// or use the helper method for easier refactoring
-//        restaurantDao.add(restaurant);
-//        restaurantDao.update(restaurant.getId(),"mow the lawn", "","","","", "");
-//        Restaurant updatedRestaurant =  restaurantDao.findById(restaurant.getId()); //why do I need to refind this?
-//        assertEquals(initialName, updatedRestaurant.getName());
-//    }
 
     @Test
     public void deleteByIdDeletesCorrectRestaurant() throws Exception {

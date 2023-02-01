@@ -63,23 +63,7 @@ public class Sql2oRestaurantDao implements RestaurantDao { //don't forget to sha
             System.out.println(ex);
         }
     }
-//    @Override
-//    public void update(int id, String newName, String newAddress, String newZipcode, String newPhone,  String website, String email) {
-//        String sql = "UPDATE restaurants SET (name, address, zipcode, phone,  website, email) = (:name, :address, :zipcode, :phone, :website, :email) WHERE id=:id";
-//        try(Connection con = sql2o.open()){
-//            con.createQuery(sql)
-//                    .addParameter("name", newName)
-//                    .addParameter("address", newAddress)
-//                    .addParameter("zipcode", newZipcode)
-//                    .addParameter("phone", newPhone)
-//                    .addParameter("website",website)
-//                    .addParameter("email", email)
-//                    .addParameter("id", id)
-//                    .executeUpdate();
-//        } catch (Sql2oException ex) {
-//            System.out.println(ex);
-//        }
-//    }
+
     @Override
     public void deleteById(int id) {
         String sql = "DELETE from restaurants WHERE id = :id"; //raw sql
