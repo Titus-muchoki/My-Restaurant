@@ -26,6 +26,9 @@ public class App {
     }
 
     public static void main(String[] args) {
+        port(getHerokuAssignedPort());
+        staticFileLocation("/public");
+
         Sql2oFoodtypeDao foodtypeDao;
         Sql2oRestaurantDao restaurantDao;
         Sql2oReviewDao reviewDao;
